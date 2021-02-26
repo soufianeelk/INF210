@@ -58,6 +58,9 @@ public class MessageCandidatureDAO
   }
   
   public void remove(MessageCandidature messageCandidature) {
+	  if(!entityManager.contains(messageCandidature)) {
+		  messageCandidature = entityManager.merge(messageCandidature);
+	  }
 	  entityManager.remove(messageCandidature);
   }
 

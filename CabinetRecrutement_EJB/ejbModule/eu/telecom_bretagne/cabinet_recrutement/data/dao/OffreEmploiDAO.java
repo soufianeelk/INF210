@@ -58,22 +58,25 @@ public class OffreEmploiDAO
   }
   
   public void remove(OffreEmploi offreEmploi) {
+	  if(!entityManager.contains(offreEmploi)) {
+		  offreEmploi = entityManager.merge(offreEmploi);
+	  }
 	  entityManager.remove(offreEmploi);
   }
   
   public List<OffreEmploi> findByEntreprise(int idEntreprise)
   {
     Query query = entityManager.createQuery("select offreEmploi from OffreEmploi offreEmploi " +
-                                            "where offreEmploi.entreprise.id = :idE " +
+                                            "where offreEmploi.entrepriseBean.id = :idE " +
                                             "order by offreEmploi.id desc");
     query.setParameter("idE", idEntreprise);
-    List<OffreEmploi> l = query.getResultList();
-    return l;
+    List l = query.getResultList();
+    return (List<OffreEmploi>)l;
   }
   
   public List<OffreEmploi> findBySecteurActiviteAndNiveauQualification(int idSecteurActivite, int idNiveauQualification) {
-	  Query query = entityManager.createQuery("select oe from OffreEmploi oe join oe.secteursActivite sects " +
-			  								  "where sects.id = :idSA and oe.niveauQualification.id = :idNQ " +
+	  Query query = entityManager.createQuery("select oe from OffreEmploi oe join oe.secteurActivites sects " +
+			  								  "where sects.id = :idSA and oe.niveauQualificationBean.id = :idNQ " +
 			  								  "order by oe.id desc");
 	  query.setParameter("idSA", idSecteurActivite);
 	  query.setParameter("idNQ", idNiveauQualification);

@@ -37,7 +37,7 @@ drop table if exists secteur_activite;
 create table entreprise
 (
   id              serial primary key,
-  nom             varchar(50) not null,
+  nom             varchar(50),
   descriptif      text,
   adresse_postale varchar(30) -- Pour simplifier, adresse_postale = ville.
 );
@@ -45,25 +45,25 @@ create table entreprise
 CREATE TABLE niveau_qualification 
 (
 	id serial primary key,
-	intitule varchar(50) not null
+	intitule varchar(50)
 );
 
 CREATE TABLE secteur_activite 
 (
 	id serial primary key,
-	intitule varchar(50) not null
+	intitule varchar(50)
 );
 
 CREATE TABLE candidature 
 (
 	id serial primary key,
-	nom varchar(50) not null,
-	prenom varchar(50) not null,
+	nom varchar(50),
+	prenom varchar(50),
 	dateNaissance date,
 	adressePostale varchar(50),
 	adresseEmail varchar(50),
 	CV text,
-	dateDepot date not null,
+	dateDepot date,
 	niveau_qualification int not null REFERENCES niveau_qualification(id)
 );
 
@@ -79,7 +79,7 @@ CREATE TABLE detail_candidature
 CREATE TABLE offre_emploi 
 (
 	id serial primary key,
-	titre varchar(50) not null,
+	titre varchar(50),
 	descriptifMission text,
 	profilRecherche text,
 	dateDepot date,
@@ -99,7 +99,7 @@ CREATE TABLE detail_offre_emploi
 CREATE TABLE message_offre_demploi 
 (
 	id serial primary key,
-	dateEnvoi date not null,
+	dateEnvoi date,
 	corpsMessage text,
 	offre_emploi int not null REFERENCES offre_emploi(id),
 	candidature int not null REFERENCES candidature(id)

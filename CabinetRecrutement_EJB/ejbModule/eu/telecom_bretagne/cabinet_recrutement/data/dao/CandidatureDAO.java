@@ -58,12 +58,15 @@ public class CandidatureDAO
   }
   
   public void remove(Candidature candidature) {
+	  if(!entityManager.contains(candidature)) {
+		  candidature = entityManager.merge(candidature);
+	  }
 	  entityManager.remove(candidature);
   }
   
   public List<Candidature> findBySecteurActiviteAndNiveauQualification(int idSecteurActivite, int idNiveauQualification) {
-	  Query query = entityManager.createQuery("select c from Candidature c join c.secteursActivite secteur " + 
-			  								  "where secteur.id = :idSA and c.niveauQualification.id = :idNQ " +
+	  Query query = entityManager.createQuery("select c from Candidature c join c.secteurActivites secteur " + 
+			  								  "where secteur.id = :idSA and c.niveauQualificationBean.id = :idNQ " +
 			  								  "order by c.id desc");
 	  query.setParameter("idSA", idSecteurActivite);
 	  query.setParameter("idNQ", idNiveauQualification);

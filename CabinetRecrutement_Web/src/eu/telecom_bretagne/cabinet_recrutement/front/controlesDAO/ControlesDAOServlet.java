@@ -71,7 +71,170 @@ public class ControlesDAOServlet extends HttpServlet
     
     // Contrôle(s) de fonctionnalités.
     
-    out.println("Liste des entreprises :");
+    //TESTS RAPIDES
+    out.println();
+    out.println("Afficher Entreprises");
+    for(Entreprise e: entrepriseDAO.findAll()) {
+    	out.println("Id: " + e.getId());
+    	out.println("Nom: " + e.getNom());
+    }
+    out.println();
+    out.println("Création Entreprise");
+    Entreprise e1 = new Entreprise();
+    entrepriseDAO.persist(e1);
+    out.println("Entreprise créée:");
+    out.println("Nom: "+e1.getNom());
+    e1 = entrepriseDAO.findById(1);
+    out.println("Entreprise id 1");
+    out.println("Id: " + e1.getId());
+    out.println("Nom: " + e1.getNom());
+    e1.setNom("UPDATE OK");
+    entrepriseDAO.update(e1);
+    out.println("Entreprise modifiée");
+    out.println("Nom: "+e1.getNom());
+    
+
+    
+    out.println();
+    out.println();
+    out.println("Afficher Niveaux Qualifications");
+    for(NiveauQualification nQ: niveauQualificationDAO.findAll()) {
+    	out.println("Id: " + nQ.getId());
+    	out.println("Nom: " + nQ.getIntitule());
+    }
+    out.println();
+    out.println("Creation NiveauQualification");
+    NiveauQualification nQ = new NiveauQualification();
+    niveauQualificationDAO.persist(nQ);
+    out.println("Nom: " + nQ.getIntitule());
+    nQ = niveauQualificationDAO.findById(1);
+    out.println("NiveauQualification d'id 1:");
+    out.println("Id: " + nQ.getId());
+	out.println("Nom: " + nQ.getIntitule());
+    nQ.setIntitule("UPDATE OK");
+    niveauQualificationDAO.update(nQ);
+    out.println("NiveauQualification modifié");
+    out.println("Nom: " + nQ.getIntitule());
+
+	
+	out.println();
+    out.println();
+    out.println("Afficher Secteurs Activites");
+    for(SecteurActivite sA: secteurActiviteDAO.findAll()) {
+    	out.println("Id: " + sA.getId());
+    	out.println("Nom: " + sA.getIntitule());
+    }
+    out.println();
+    out.println("Création SecteurActivite");
+    SecteurActivite sA = new SecteurActivite();
+    secteurActiviteDAO.persist(sA);
+	out.println("Nom: " + sA.getIntitule());
+    out.println("NiveauQualification d'id 1:");
+    sA = secteurActiviteDAO.findById(1);
+    out.println("Id: " + sA.getId());
+	out.println("Nom: " + sA.getIntitule());
+    sA.setIntitule("UPDATE OK");
+    secteurActiviteDAO.update(sA);
+    out.println("SecteurActivite modifié");
+    out.println("Nom: " + sA.getIntitule());
+
+	
+	out.println();
+	out.println();
+	out.println("Afficher Offres Emploi");
+    for(OffreEmploi oE: offreEmploiDAO.findAll()) {
+    	out.println("Id: " + oE.getId());
+    	out.println("Nom: " + oE.getTitre());
+    }
+    
+    out.println();
+    out.println("Création OffreEmploi");
+    OffreEmploi oE = new OffreEmploi();
+    oE.setEntrepriseBean(e1);
+    oE.setNiveauQualificationBean(nQ);
+    oE.setSecteurActivites(new HashSet<SecteurActivite>());
+    oE.addSecteurActivite(sA);
+    offreEmploiDAO.persist(oE);
+    out.println("Titre: " + oE.getTitre());
+    out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
+    out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
+    out.println("Secteurs:");
+    for(SecteurActivite sAC: oE.getSecteurActivites()) {
+    	out.println("Id: " + sAC.getId());
+    	out.println(sAC.getIntitule());
+    }
+    out.println();
+    out.println("OffreEmploi d'id 1");
+    offreEmploiDAO.findById(1);
+    out.println("Id: " + oE.getId());
+    out.println("Titre: " + oE.getTitre());
+    out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
+    out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
+    oE.setTitre("UPDATE OK");
+    offreEmploiDAO.update(oE);
+    out.println("OffreEmploi modifiée:");
+    out.println("Id: " + oE.getId());
+    out.println("Titre: " + oE.getTitre());
+    out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
+    out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
+    offreEmploiDAO.remove(oE); 
+    out.println("Suprresion de l'offre Emploi id 1");
+    out.println("Cherche les offres d'emploi de l'entreprise d'id 2:");
+    for (OffreEmploi oEM: offreEmploiDAO.findByEntreprise(2)) {
+    	out.println("Id: " + oEM.getId());
+        out.println("Titre: " + oE.getTitre());
+        out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
+        out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
+    }
+    out.println("Cherche les offres d''emploi de secteur et qualifiation d''ids 1");
+    for (OffreEmploi oEM: offreEmploiDAO.findBySecteurActiviteAndNiveauQualification(1, 1)) {
+    	out.println("Id: " + oEM.getId());
+        out.println("Titre: " + oE.getTitre());
+        out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
+        out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
+    }
+    
+    candidatureDAO.findAll();
+    Candidature c = new Candidature();
+    c.setId(100);
+    c.setNiveauQualificationBean(nQ);
+    c.setSecteurActivites(new HashSet<SecteurActivite>());
+    c.addSecteurActivite(sA);
+    candidatureDAO.persist(c);
+    c.setNom("UPDATE OK");
+    candidatureDAO.update(c);
+    candidatureDAO.remove(c);
+    candidatureDAO.findById(1);
+    candidatureDAO.findBySecteurActiviteAndNiveauQualification(1, 1);
+    
+   /* messageCandidatureDAO.findAll();
+    MessageCandidature mC = new MessageCandidature();
+    mC.setId(100);
+    mC.setCandidatureBean(c);
+    mC.setOffreEmploiBean(oE);
+    messageCandidatureDAO.persist(mC);
+    mC.setCorpsmessage("UPDATE OK");
+    messageCandidatureDAO.update(mC);
+    messageCandidatureDAO.remove(mC);
+    messageCandidatureDAO.findById(1);
+    
+    messageOffreDemploiDAO.findAll();
+    MessageOffreDemploi mOE = new MessageOffreDemploi();
+    mOE.setId(100);
+    mOE.setOffreEmploiBean(oE);
+    mOE.setCandidatureBean(c);;
+    messageOffreDemploiDAO.persist(mOE);
+    mOE.setCorpsmessage("UPDATE OK");
+    messageOffreDemploiDAO.update(mOE);
+    messageOffreDemploiDAO.remove(mOE);
+    messageOffreDemploiDAO.findById(1);
+    
+    entrepriseDAO.remove(e1);
+    
+    
+    //---------------------------------------------------------------------------------------------------------//
+    
+   /* out.println("Liste des entreprises :");
     List<Entreprise> entreprises = entrepriseDAO.findAll();
     
     for(Entreprise entreprise : entreprises)
@@ -300,55 +463,9 @@ public class ControlesDAOServlet extends HttpServlet
     out.println("---Creation Offre Emploi---");
     
     //CREATION MESSAGE CANDIDATURE
-    
-   /* //TESTS RAPIDES
-    entrepriseDAO.findAll();
-    Entreprise e1 = new Entreprise();
-    entrepriseDAO.persist(e1);
-    e1 = entrepriseDAO.findById(e1.getId());
-    e1.setNom("UPDATE OK");
-    entrepriseDAO.update(e1);
-    
-    niveauQualificationDAO.findAll();
-    NiveauQualification nQ = new NiveauQualification();
-    niveauQualificationDAO.persist(nQ);
-    nQ = niveauQualificationDAO.findById(nQ.getId());
-    nQ.setIntitule("UPDATE OK");
-    niveauQualificationDAO.update(nQ);
-    niveauQualificationDAO.findById(nQ.getId());
-    
-    secteurActiviteDAO.findAll();
-    SecteurActivite sA = new SecteurActivite();
-    secteurActiviteDAO.persist(sA);
-    secteurActiviteDAO.findById(sA.getId());
-    
-    offreEmploiDAO.findAll();
-    OffreEmploi oE = new OffreEmploi();
-    oE.setEntrepriseBean(e1);
-    oE.setNiveauQualificationBean(nQ);
-    oE.setSecteurActivites(new HashSet<SecteurActivite>());
-    oE.addSecteurActivite(sA);
-    offreEmploiDAO.persist(oE);
-    
-    candidatureDAO.findAll();
-    Candidature c = new Candidature();
-    c.setNiveauQualificationBean(nQ);
-    c.setSecteurActivites(new HashSet<SecteurActivite>());
-    c.addSecteurActivite(sA);
-    candidatureDAO.persist(c);
-    c = candidatureDAO.findById(c.getId());
-    c.setNom("UPDATE OK");
-    candidatureDAO.update(c);
-    candidatureDAO.remove(c);
-    
-    
-    
-    
    
-    
-    
-    
-    out.println("--- Test de recherche de candidature avec secteur d'activité et niveau de qualification spécifique (ID=1/ID=2) ");
+  
+    /*out.println("--- Test de recherche de candidature avec secteur d'activité et niveau de qualification spécifique (ID=1/ID=2) ");
     out.println();
     
     List<Candidature> c=candidatureDAO.findBySecteurActiviteAndNiveauQualification(1, 2);
