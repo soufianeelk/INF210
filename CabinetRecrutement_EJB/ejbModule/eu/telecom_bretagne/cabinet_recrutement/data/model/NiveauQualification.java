@@ -98,7 +98,7 @@ public class NiveauQualification implements Serializable {
 	
 	public void removeOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmplois.remove(offreEmploi);
-		offreEmploi.setNiveauQualificationBean(this);
+		offreEmploi.setNiveauQualificationBean(null);
 	}
 
 	/*public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {

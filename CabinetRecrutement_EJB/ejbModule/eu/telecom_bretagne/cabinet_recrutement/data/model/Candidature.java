@@ -2,7 +2,10 @@ package eu.telecom_bretagne.cabinet_recrutement.data.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -124,6 +127,19 @@ public class Candidature implements Serializable {
 		return this.niveauQualificationBean;
 	}
 
+	public List<NiveauQualification> setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
+		List<NiveauQualification> nvxQualification = new ArrayList<>();
+		NiveauQualification nQ = this.getNiveauQualificationBean();
+		if(nQ != null) {
+			nQ.removeCandidature(this);
+			nvxQualification.add(nQ);
+		}
+		this.niveauQualificationBean = niveauQualificationBean;
+		niveauQualificationBean.getCandidatures().add(this);
+		nvxQualification.add(this.niveauQualificationBean);
+		return nvxQualification;
+	}
+	/*
 	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
 		this.niveauQualificationBean = niveauQualificationBean;
 		niveauQualificationBean.getCandidatures().add(this);

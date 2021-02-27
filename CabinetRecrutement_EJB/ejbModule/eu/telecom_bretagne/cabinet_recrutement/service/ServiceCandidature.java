@@ -1,6 +1,5 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -86,12 +85,11 @@ public class ServiceCandidature implements IServiceCandidature
 	  for(MessageCandidature message: candidature.getMessageCandidatures()) {
 		  messagesEnvoyes.add(message);
 	  }
-	  
 	  return messagesEnvoyes;
   }
   
   @Override
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<SecteurActivite> secteursActivites) {
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSecteursActivites) {
 	  Candidature candidature = new Candidature();
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
@@ -100,7 +98,12 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setPrenom(prenom);
 	  candidature.setDatedepot(new Date());
 	  candidature.setDatenaissance(dateNaissance);
-	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)));
+	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
+	  List<SecteurActivite> secteursActivites = new ArrayList<>();
+	  
+	  for(Integer idSQ: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(idSQ));
+	  }
 	  candidature.setSecteurActivites(new HashSet<SecteurActivite>());
 	  for(SecteurActivite sA: secteursActivites) {
 		  secteurActiviteDAO.update(candidature.addSecteurActivite(sA));
@@ -109,7 +112,7 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<SecteurActivite> secteursActivites) {
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSecteursActivites) {
 	  Candidature candidature = candidatureDAO.findById(id);
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
@@ -118,29 +121,27 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setPrenom(prenom);
 	  candidature.setDatenaissance(dateNaissance);
 	  
-	  //Pas mieux de faire ça ? :
-	  
-	  
-	  for(NiveauQualification nQ: niveauQualificationDAO.findAll()){
+	  /*for(NiveauQualification nQ: niveauQualificationDAO.findAll()){
 		  for(Candidature c: nQ.getCandidatures()) {
 			if(c == candidature) {
 				nQ.getCandidatures().remove(c);
 			}
 		  }
 		  niveauQualificationDAO.update(nQ);
+	  }*/
+	  
+	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
+	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(2));
+	  
+	  for(SecteurActivite sA: candidature.getSecteurActivites()) {
+		  sA.removeCandidature(candidature);
 	  }
 	  
-	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)));
-	  
-	  for(SecteurActivite sA: secteurActiviteDAO.findAll()) {
-		  for(Candidature c: sA.getCandidatures()) {
-			  if(c==candidature) {
-				  sA.getCandidatures().remove(c);
-			  }
-			  secteurActiviteDAO.update(sA);
-		  }
-	  }
 	  candidature.setSecteurActivites(new HashSet<SecteurActivite>());
+	  List<SecteurActivite> secteursActivites = new ArrayList<>();
+	  for(Integer idSQ: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(idSQ));
+	  }
 	  for(SecteurActivite sA: secteursActivites) {
 		  secteurActiviteDAO.update(candidature.addSecteurActivite(sA));
 	  }

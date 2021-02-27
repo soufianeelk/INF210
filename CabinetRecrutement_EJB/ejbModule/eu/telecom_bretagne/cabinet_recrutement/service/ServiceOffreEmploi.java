@@ -78,44 +78,45 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi
   }
   
   @Override
-  public OffreEmploi nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<SecteurActivite> secteursActivites) {
+  public OffreEmploi nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<Integer> idSecteursActivites) {
 	  OffreEmploi offreEmploi = new OffreEmploi();
 	  offreEmploi.setDatedepot(new Date());
 	  offreEmploi.setTitre(titre);
 	  offreEmploi.setDescriptifmission(descriptif);
 	  offreEmploi.setProfilrecherche(profilRecherche);
 	  offreEmploi.setEntrepriseBean(entrepriseDAO.findById(idEntreprise));
-	  niveauQualificationDAO.update(offreEmploi.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)));
+	  niveauQualificationDAO.update(offreEmploi.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
+	  
+	  List<SecteurActivite> secteursActivites = new ArrayList<>();
+	  for(Integer idSA: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(idSA));
+	  }
+	  
 	  offreEmploi.setSecteurActivites(new HashSet<SecteurActivite>());
 	  for(SecteurActivite sA: secteursActivites) {
 		  secteurActiviteDAO.update(offreEmploi.addSecteurActivite(sA));
 	  }
+	  offreEmploiDAO.persist(offreEmploi);
 	  return offreEmploi;
 	  
   }
   
   @Override
-  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<SecteurActivite> secteursActivites) {
+  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<Integer> idSecteursActivites) {
 	  OffreEmploi offreEmploi = offreEmploiDAO.findById(id);
 	  offreEmploi.setTitre(titre);
 	  offreEmploi.setDescriptifmission(descriptif);
 	  offreEmploi.setProfilrecherche(profilRecherche);
-	  for(NiveauQualification nQualification: niveauQualificationDAO.findAll()) {
-		  for(OffreEmploi oE: nQualification.getOffreEmplois()) {
-			  if(oE == offreEmploi) {
-				  nQualification.getOffreEmplois().remove(oE);
-			  }
-		  }
-		  niveauQualificationDAO.update(nQualification);
-	  }
-	  niveauQualificationDAO.update(offreEmploi.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)));
+	  niveauQualificationDAO.update(offreEmploi.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
+	  niveauQualificationDAO.update(offreEmploi.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(2));
 	  
-	  for(SecteurActivite sA: secteurActiviteDAO.findAll()) {
-		  for(OffreEmploi oE: sA.getOffreEmplois()) {
-			  if(oE==offreEmploi) {
-				  sA.getOffreEmplois().remove(oE);
-			  }
-		  }
+	  List<SecteurActivite> secteursActivites = new ArrayList<>();
+	  for(Integer idSA: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(idSA));
+	  }
+	  
+	  for(SecteurActivite sA: offreEmploi.getSecteurActivites()) {
+		  sA.removeOffreEmploi(offreEmploi);
 		  secteurActiviteDAO.update(sA);
 	  }
 	  
