@@ -1,6 +1,7 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -83,14 +84,13 @@ public class ServiceEntreprise implements IServiceEntreprise
 	  entreprise.setNom(nom);
 	  entreprise.setAdressePostale(adressePostale);
 	  entreprise.setDescriptif(descriptif);
+	  entreprise.setOffreEmplois(new HashSet<OffreEmploi>());
 	  entrepriseDAO.persist(entreprise);
 	  return entreprise;
-	  //return(entrepriseDAO.persist(entreprise));
   }
   
   public Entreprise miseAJourEntreprise(int id, String nom, String adressePostale, String descriptif) {
-	  Entreprise entreprise = new Entreprise();
-	  entreprise.setId(id);
+	  Entreprise entreprise = entrepriseDAO.findById(id);
 	  entreprise.setNom(nom);
 	  entreprise.setAdressePostale(adressePostale);
 	  entreprise.setDescriptif(descriptif);
@@ -98,8 +98,7 @@ public class ServiceEntreprise implements IServiceEntreprise
   }
   
   public void effaceEntreprise(int id) {
-	  Entreprise entreprise = new Entreprise();
-	  entreprise.setId(id);
+	  Entreprise entreprise = entrepriseDAO.findById(id);
 	  entrepriseDAO.remove(entreprise);
   }
 }

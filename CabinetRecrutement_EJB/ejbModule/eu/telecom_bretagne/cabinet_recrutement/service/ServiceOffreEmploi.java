@@ -8,78 +8,62 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.NiveauQualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
 
 /**
- * Session Bean implementation class ServiceCandidature
+ * Session Bean implementation class ServiceOffreEmploi
  * @author Philippe TANGUY
  */
 @Stateless
 @LocalBean
-public class ServiceCandidature implements IServiceCandidature
+public class ServiceOffreEmploi implements IServiceOffreEmploi
 {
   //-----------------------------------------------------------------------------
-  @EJB private CandidatureDAO candidatureDAO;
+  @EJB private OffreEmploiDAO candidatureDAO;
   @EJB private OffreEmploiDAO offreEmploiDAO;
   @EJB private NiveauQualificationDAO niveauQualificationDAO;
   //-----------------------------------------------------------------------------
   /**
    * Default constructor.
    */
-  public ServiceCandidature()
+  public ServiceOffreEmploi()
   {
     // TODO Auto-generated constructor stub
   }
   //-----------------------------------------------------------------------------
   @Override
-  public Candidature obtenirCandidature(int id)
+  public OffreEmploi obtenirOffreEmploi(int id)
   {
     return candidatureDAO.findById(id);
   }
   //-----------------------------------------------------------------------------
   @Override
-  public List<Candidature> listeDesCandidatures()
+  public List<OffreEmploi> listeDesOffreEmplois()
   {
     return candidatureDAO.findAll();
   }
   //-----------------------------------------------------------------------------
   
   @Override
-  public List<Candidature> listeDesCandidaturesPourUneOffre(int idOffre) {
-	  OffreEmploi offre = offreEmploiDAO.findById(idOffre);
-	  List<Candidature> candidatures = new ArrayList<>();
-	  for(MessageCandidature messageCandidature: offre.getMessageCandidatures()) {
-		 candidatures.add(messageCandidature.getCandidatureBean());
-	  }
-	  return candidatures;
-	  
+  public  List<MessageOffreDemploi> listeDesOffresPourUneEntreprise(int idEntreprise) {
   }
   
   @Override
-  public  List<MessageOffreDemploi> listeDesMessagesRecus(int idCandidature){
-	  List<MessageOffreDemploi> messagesRecus = new ArrayList<>();
-	  Candidature candidature = candidatureDAO.findById(idCandidature);
-	  for(MessageOffreDemploi message: candidature.getMessageOffreDemplois()) {
-		  messagesRecus.add(message);
-	  }
-	  
-	  return messagesRecus;
-
+  public List<MessageOffreDemploi> listeDesOffresPourUneCandidature(int idCandidature){
   }
   
   @Override
-  public List<MessageCandidature> listeDesMessagesEnvoyes(int idCandidature){
-	  List<MessageCandidature> messagesEnvoyes = new ArrayList<>();
-	  Candidature candidature = candidatureDAO.findById(idCandidature);
-	  for(MessageCandidature message: candidature.getMessageCandidatures()) {
+  public List<MessageOffreEmploi> listeDesMessagesEnvoyes(int idOffreEmploi){
+	  List<MessageOffreEmploi> messagesEnvoyes = new ArrayList<>();
+	  OffreEmploi candidature = candidatureDAO.findById(idOffreEmploi);
+	  for(MessageOffreEmploi message: candidature.getMessageOffreEmplois()) {
 		  messagesEnvoyes.add(message);
 	  }
 	  
@@ -87,8 +71,8 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites) {
-	  Candidature candidature = new Candidature();
+  public OffreEmploi nouvelleOffreEmploi(String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites) {
+	  OffreEmploi candidature = new OffreEmploi();
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
 	  candidature.setCv(cv);
@@ -103,8 +87,8 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites) {
-	  Candidature candidature = candidatureDAO.findById(id);
+  public OffreEmploi miseAJourOffreEmploi(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites) {
+	  OffreEmploi candidature = candidatureDAO.findById(id);
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
 	  candidature.setCv(cv);
@@ -112,9 +96,9 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setPrenom(prenom);
 	  
 	  for(NiveauQualification nQ: niveauQualificationDAO.findAll()){
-		  for(Candidature c: nQ.getCandidatures()) {
+		  for(OffreEmploi c: nQ.getOffreEmplois()) {
 			if(c == candidature) {
-				nQ.getCandidatures().remove(c);
+				nQ.getOffreEmplois().remove(c);
 			}
 		  }
 	  }
@@ -124,8 +108,8 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public void effaceCandidature(int id) {
-	  Candidature candidature = new Candidature();
+  public void effaceOffreEmploi(int id) {
+	  OffreEmploi candidature = new OffreEmploi();
 	  candidature.setId(id);
 	  candidatureDAO.remove(candidature);
   }

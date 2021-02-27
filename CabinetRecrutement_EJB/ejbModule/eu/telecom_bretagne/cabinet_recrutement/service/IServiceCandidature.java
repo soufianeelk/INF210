@@ -1,12 +1,13 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Remote;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
 
 /**
  * Interface du service gérant les candidatures.
@@ -24,38 +25,38 @@ public interface IServiceCandidature
    */
   public Candidature obtenirCandidature(int id);
   /**
-   * Obtention de la Sete de toutes les candidatures.
+   * Obtention de la liste de toutes les candidatures.
    * 
    * @return la Sete des candidatures dans une {@code Set<Candidature>}.
    */
-  public Set<Candidature> SeteDesCandidatures();
+  public List<Candidature> listeDesCandidatures();
   
   /*
    * 
    */
-  public Set<Candidature> SeteDesCandidaturesPourUneOffre(int idOffre);
+  public List<Candidature> listeDesCandidaturesPourUneOffre(int idOffre);
   
   /*
    * 
    */
-  public  Set<MessageOffreDemploi> SeteDesMessagesRecus(int idCandidature);
+  public  List<MessageOffreDemploi> listeDesMessagesRecus(int idCandidature);
   
   /*
    * 
    */
-  public Set<MessageCandidature> SeteDesMessagesEnvoyes(int idCandidature);
+  public List<MessageCandidature> listeDesMessagesEnvoyes(int idCandidature);
   //-----------------------------------------------------------------------------
   
   /**
    * 
    */
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom);
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites);
   
   
   /*
    * 
    */
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom);
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivite);
   
   /*
    * 

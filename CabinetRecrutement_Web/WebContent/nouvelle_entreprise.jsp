@@ -34,7 +34,7 @@ if(request.getMethod().equalsIgnoreCase("post"))
         
             <div class="col-lg-offset-2 col-lg-8
                         col-xs-12">
-              <form role="form" action="template.jsp" method="get">
+              <form role="form" action="template.jsp" method="post">
                 <input type="hidden" name="action" value="nouvelle_entreprise" />
                 <div class="form-group">
                   <input class="form-control" placeholder="Nom de l'entreprise" name="nom" />

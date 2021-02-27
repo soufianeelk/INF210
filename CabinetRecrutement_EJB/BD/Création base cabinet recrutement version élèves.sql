@@ -109,7 +109,7 @@ CREATE TABLE message_offre_demploi
 CREATE TABLE message_candidature 
 (
 	id serial primary key,
-	dateEnvoi date not null,
+	dateEnvoi date,
 	corpsMessage text,
 	candidature int not null REFERENCES candidature(id),
 	offre_emploi int not null REFERENCES offre_emploi(id)

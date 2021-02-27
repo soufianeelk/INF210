@@ -22,7 +22,7 @@
       id = new Integer(idStringValue);
       // C'est OK : on a bien un id
       IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
-      entreprise = serviceEntreprise.getEntreprise(id);
+      entreprise = serviceEntreprise.obtenirEntreprise(id);
       if(entreprise == null)
       {
         erreur="Aucune entreprise ne correspond à cet identifiant : " + id;

@@ -49,7 +49,7 @@ public class ControlesDAOServlet extends HttpServlet
     NiveauQualificationDAO niveauQualificationDAO = null;
     OffreEmploiDAO offreEmploiDAO = null;
     SecteurActiviteDAO secteurActiviteDAO=null;
-    MessageOffreDemploiDAO messageOffreDemploiDAO=null;
+    MessageOffreDEmploiDAO messageOffreDemploiDAO=null;
     MessageCandidatureDAO messageCandidatureDAO=null;
 
     try
@@ -59,7 +59,7 @@ public class ControlesDAOServlet extends HttpServlet
       niveauQualificationDAO = (NiveauQualificationDAO) ServicesLocator.getInstance().getRemoteInterface("NiveauQualificationDAO");
       offreEmploiDAO = (OffreEmploiDAO) ServicesLocator.getInstance().getRemoteInterface("OffreEmploiDAO");
       secteurActiviteDAO = (SecteurActiviteDAO) ServicesLocator.getInstance().getRemoteInterface("SecteurActiviteDAO");
-      messageOffreDemploiDAO = (MessageOffreDemploiDAO) ServicesLocator.getInstance().getRemoteInterface("MessageOffreDemploiDAO");
+      messageOffreDemploiDAO = (MessageOffreDEmploiDAO) ServicesLocator.getInstance().getRemoteInterface("MessageOffreDemploiDAO");
       messageCandidatureDAO = (MessageCandidatureDAO) ServicesLocator.getInstance().getRemoteInterface("MessageCandidatureDAO");
     }
     catch (ServicesLocatorException e)
@@ -77,6 +77,12 @@ public class ControlesDAOServlet extends HttpServlet
     for(Entreprise e: entrepriseDAO.findAll()) {
     	out.println("Id: " + e.getId());
     	out.println("Nom: " + e.getNom());
+    	out.println("Liste Offres Emplois");
+    	//out.println(e.getOffreEmplois());
+    	for(OffreEmploi oE: e.getOffreEmplois()) {
+    		out.println("Id: " + oE.getId());
+    		out.println("Title: "  + oE.getTitre());
+    	}
     }
     out.println();
     out.println("Création Entreprise");
@@ -177,8 +183,6 @@ public class ControlesDAOServlet extends HttpServlet
     out.println("Titre: " + oE.getTitre());
     out.println("Entreprise associée: " + oE.getEntrepriseBean().getNom());
     out.println("Niveau Qualification: " + oE.getNiveauQualificationBean());
-    offreEmploiDAO.remove(oE); 
-    out.println("Suprresion de l'offre Emploi id 1");
     out.println("Cherche les offres d'emploi de l'entreprise d'id 2:");
     for (OffreEmploi oEM: offreEmploiDAO.findByEntreprise(2)) {
     	out.println("Id: " + oEM.getId());
@@ -196,20 +200,17 @@ public class ControlesDAOServlet extends HttpServlet
     
     candidatureDAO.findAll();
     Candidature c = new Candidature();
-    c.setId(100);
     c.setNiveauQualificationBean(nQ);
     c.setSecteurActivites(new HashSet<SecteurActivite>());
     c.addSecteurActivite(sA);
     candidatureDAO.persist(c);
     c.setNom("UPDATE OK");
     candidatureDAO.update(c);
-    candidatureDAO.remove(c);
     candidatureDAO.findById(1);
     candidatureDAO.findBySecteurActiviteAndNiveauQualification(1, 1);
     
-   /* messageCandidatureDAO.findAll();
+    messageCandidatureDAO.findAll();
     MessageCandidature mC = new MessageCandidature();
-    mC.setId(100);
     mC.setCandidatureBean(c);
     mC.setOffreEmploiBean(oE);
     messageCandidatureDAO.persist(mC);
@@ -220,7 +221,6 @@ public class ControlesDAOServlet extends HttpServlet
     
     messageOffreDemploiDAO.findAll();
     MessageOffreDemploi mOE = new MessageOffreDemploi();
-    mOE.setId(100);
     mOE.setOffreEmploiBean(oE);
     mOE.setCandidatureBean(c);;
     messageOffreDemploiDAO.persist(mOE);

@@ -16,7 +16,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
  */
 @Stateless
 @LocalBean
-public class MessageOffreDemploiDAO
+public class MessageOffreDEmploiDAO
 {
   //-----------------------------------------------------------------------------
   /**
@@ -28,7 +28,7 @@ public class MessageOffreDemploiDAO
   /**
    * Default constructor.
    */
-  public MessageOffreDemploiDAO()
+  public MessageOffreDEmploiDAO()
   {
     // TODO Auto-generated constructor stub
   }
