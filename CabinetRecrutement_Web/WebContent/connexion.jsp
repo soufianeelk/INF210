@@ -139,7 +139,7 @@
   	{
   		IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
   		int id = Integer.parseInt(identifiant.substring(4)); // On enlève le préfixe "ENT_";
-  		Entreprise entreprise = serviceEntreprise.getEntreprise(id);
+  		Entreprise entreprise = serviceEntreprise.obtenirEntreprise(id);
   		if(entreprise == null)
   		{
   			%>
@@ -214,7 +214,7 @@
   	{
   		IServiceCandidature serviceCandidature = (IServiceCandidature) ServicesLocator.getInstance().getRemoteInterface("ServiceCandidature");
   		int id = Integer.parseInt(identifiant.substring(5)); // On enlève le préfixe "CAND_";
-  		Candidature candidature = serviceCandidature.getCandidature(id);
+  		Candidature candidature = serviceCandidature.obtenirCandidature(id);
       if(candidature == null)
       {
         %>

@@ -2,7 +2,10 @@
 
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise,
-                eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise"%>
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature"%>
+                
+<% Object utilisateur = session.getAttribute("utilisateur"); %>
 
 <div class="navbar-default sidebar" role="navigation">
   <div class="sidebar-nav navbar-collapse">
@@ -22,6 +25,20 @@
           <li><a href="template.jsp?action=liste_offres">Liste de toutes les offres d'emploi</a></li>
         </ul> <!-- /.nav-second-level -->
       </li>
+      
+      <%if(utilisateur instanceof Entreprise){ %>
+      <li><h2></h2></li>
+      <li>
+       <a href="#"><i class="fa fa-th"></i> Menu <strong>ENTREPRISE</strong><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
+          <li><a href="template.jsp?action=entreprise_liste_offres">Liste des offres d'emplois (<%= ((Entreprise) utilisateur).getOffreEmplois().size() %>)</a></li>
+          <li><a href="template.jsp?action=maj_entreprise">Mettre à jour les informations de l'entreprise</a></li>
+        </ul> <!-- /.nav-second-level -->
+      </li>
+      <%} %>
+      
+      <%if(utilisateur instanceof Candidature){ %>
       <li>
         <a href="#"><i class="fa fa-users"></i> Gestion des candidatures<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
@@ -29,6 +46,7 @@
           <li><a href="template.jsp?action=liste_candidatures">Liste des candidatures</a></li>
         </ul> <!-- /.nav-second-level -->
       </li>
+      <%} %>
 
       <!--
         MENU SECONDAIRE

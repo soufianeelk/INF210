@@ -98,6 +98,9 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setPrenom(prenom);
 	  candidature.setDatedepot(new Date());
 	  candidature.setDatenaissance(dateNaissance);
+	  
+	  
+	  
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
 	  List<SecteurActivite> secteursActivites = new ArrayList<>();
 	  
@@ -129,6 +132,8 @@ public class ServiceCandidature implements IServiceCandidature
 		  }
 		  niveauQualificationDAO.update(nQ);
 	  }*/
+	  
+	
 	  
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(2));
