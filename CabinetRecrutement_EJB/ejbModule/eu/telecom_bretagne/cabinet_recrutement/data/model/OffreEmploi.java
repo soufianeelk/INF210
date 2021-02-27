@@ -103,9 +103,10 @@ public class OffreEmploi implements Serializable {
 		this.messageCandidatures = messageCandidatures;
 	}
 
-	public void addMessageCandidature(MessageCandidature messageCandidature) {
+	public MessageCandidature addMessageCandidature(MessageCandidature messageCandidature) {
 		this.messageCandidatures.add(messageCandidature);
 		messageCandidature.setOffreEmploiBean(this);
+		return messageCandidature;
 	}
 	
 	public void removeMessageCandidature(MessageCandidature messageCandidature) {
@@ -135,9 +136,10 @@ public class OffreEmploi implements Serializable {
 		this.messageOffreDemplois = messageOffreDemplois;
 	}
 	
-	public void addMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
+	public MessageOffreDemploi addMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
 		this.messageOffreDemplois.add(messageOffreDemploi);
 		messageOffreDemploi.setOffreEmploiBean(this);
+		return messageOffreDemploi;
 	}
 	
 	public void removeMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
@@ -163,18 +165,20 @@ public class OffreEmploi implements Serializable {
 		return this.entrepriseBean;
 	}
 
-	public void setEntrepriseBean(Entreprise entrepriseBean) {
+	public Entreprise setEntrepriseBean(Entreprise entrepriseBean) {
 		this.entrepriseBean = entrepriseBean;
 		entrepriseBean.getOffreEmplois().add(this);
+		return entrepriseBean;
 	}
 
 	public NiveauQualification getNiveauQualificationBean() {
 		return this.niveauQualificationBean;
 	}
 
-	public void setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
+	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
 		this.niveauQualificationBean = niveauQualificationBean;
 		niveauQualificationBean.getOffreEmplois().add(this);
+		return niveauQualificationBean;
 	}
 
 	/*public void setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {

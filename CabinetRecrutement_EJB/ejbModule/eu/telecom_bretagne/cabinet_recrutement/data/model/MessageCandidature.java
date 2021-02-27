@@ -66,9 +66,10 @@ public class MessageCandidature implements Serializable {
 		return this.candidatureBean;
 	}
 
-	public void setCandidatureBean(Candidature candidatureBean) {
+	public Candidature setCandidatureBean(Candidature candidatureBean) {
 		this.candidatureBean = candidatureBean;
 		candidatureBean.getMessageCandidatures().add(this);
+		return candidatureBean;
 	}
 	
 	/*public void setCandidatureBean(Candidature candidatureBean) {
@@ -79,9 +80,10 @@ public class MessageCandidature implements Serializable {
 		return this.offreEmploiBean;
 	}
 
-	public void setOffreEmploiBean(OffreEmploi offreEmploiBean) {
+	public OffreEmploi setOffreEmploiBean(OffreEmploi offreEmploiBean) {
 		this.offreEmploiBean = offreEmploiBean;
 		offreEmploiBean.getMessageCandidatures().add(this);
+		return offreEmploiBean;
 	}
 	
 	/*public void setOffreEmploiBean(OffreEmploi offreEmploiBean) {

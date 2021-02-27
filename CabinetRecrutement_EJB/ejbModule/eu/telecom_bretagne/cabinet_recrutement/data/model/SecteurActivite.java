@@ -75,9 +75,10 @@ public class SecteurActivite implements Serializable {
 		this.candidatures = candidatures;
 	}
 	
-	public void addCandidature(Candidature candidature) {
+	public Candidature addCandidature(Candidature candidature) {
 		this.candidatures.add(candidature);
 		candidature.getSecteurActivites().add(this);
+		return candidature;
 	}
 	
 	public void removeCandidature(Candidature candidature) {
@@ -93,9 +94,10 @@ public class SecteurActivite implements Serializable {
 		this.offreEmplois = offreEmplois;
 	}
 	
-	public void addOffreEmploi(OffreEmploi offreEmploi) {
+	public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmplois.add(offreEmploi);
 		offreEmploi.getSecteurActivites().add(this);
+		return offreEmploi;
 	}
 	
 	public void removeOffreEmploi(OffreEmploi offreEmploi) {

@@ -57,9 +57,10 @@ public class NiveauQualification implements Serializable {
 		this.candidatures = candidatures;
 	}
 
-	public void addCandidature(Candidature candidature) {
+	public Candidature addCandidature(Candidature candidature) {
 		this.candidatures.add(candidature);
 		candidature.setNiveauQualificationBean(this);
+		return candidature;
 	}
 	
 	public void removeCandidature(Candidature candidature) {
@@ -89,9 +90,10 @@ public class NiveauQualification implements Serializable {
 		this.offreEmplois = offreEmplois;
 	}
 	
-	public void addOffreEmploi(OffreEmploi offreEmploi) {
+	public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmplois.add(offreEmploi);
 		offreEmploi.setNiveauQualificationBean(this);
+		return offreEmploi;
 	}
 	
 	public void removeOffreEmploi(OffreEmploi offreEmploi) {

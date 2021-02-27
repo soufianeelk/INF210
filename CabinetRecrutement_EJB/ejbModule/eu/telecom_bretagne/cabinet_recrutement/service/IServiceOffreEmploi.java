@@ -27,12 +27,12 @@ public interface IServiceOffreEmploi {
 	  /*
 	   * 
 	   */
-	  public  List<MessageOffreDemploi> listeDesOffresPourUneEntreprise(int idEntreprise);
+	  public  List<OffreEmploi> listeDesOffresPourUneEntreprise(int idEntreprise);
 	  
 	  /*
 	   * 
 	   */
-	  public List<MessageOffreDemploi> listeDesOffresPourUneCandidature(int idCandidature);
+	  public List<OffreEmploi> listeDesOffresPourUneCandidature(int idCandidature);
 	  //-----------------------------------------------------------------------------
 	  
 	  /**

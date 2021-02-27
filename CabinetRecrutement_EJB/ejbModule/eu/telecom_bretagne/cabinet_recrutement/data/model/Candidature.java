@@ -124,9 +124,10 @@ public class Candidature implements Serializable {
 		return this.niveauQualificationBean;
 	}
 
-	public void setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
+	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
 		this.niveauQualificationBean = niveauQualificationBean;
 		niveauQualificationBean.getCandidatures().add(this);
+		return niveauQualificationBean;
 	}
 
 	/*public void setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
@@ -141,9 +142,10 @@ public class Candidature implements Serializable {
 		this.messageCandidatures = messageCandidatures;
 	}
 
-	public void addMessageCandidature(MessageCandidature messageCandidature) {
+	public MessageCandidature addMessageCandidature(MessageCandidature messageCandidature) {
 		this.messageCandidatures.add(messageCandidature);
 		messageCandidature.setCandidatureBean(this);
+		return messageCandidature;
 	}
 
 	public MessageCandidature removeMessageCandidature(MessageCandidature messageCandidature) {
@@ -175,9 +177,10 @@ public class Candidature implements Serializable {
 		this.messageOffreDemplois = messageOffreDemplois;
 	}
 
-	public void addMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
+	public MessageOffreDemploi addMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
 		this.messageOffreDemplois.add(messageOffreDemploi);
 		messageOffreDemploi.setCandidatureBean(this);
+		return messageOffreDemploi;
 	}
 
 	public void removeMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
@@ -207,14 +210,16 @@ public class Candidature implements Serializable {
 		this.secteurActivites = secteurActivites;
 	}
 	
-		public void addSecteurActivite(SecteurActivite secteurActivite) {
+		public SecteurActivite addSecteurActivite(SecteurActivite secteurActivite) {
 		this.secteurActivites.add(secteurActivite);
 		secteurActivite.getCandidatures().add(this);
+		return secteurActivite;
 	}
 	
-		public void removeSecteurActivite(SecteurActivite secteurActivite) {
+		public SecteurActivite removeSecteurActivite(SecteurActivite secteurActivite) {
 		this.secteurActivites.remove(secteurActivite);
 		secteurActivite.getCandidatures().remove(this);
+		return secteurActivite;
 	}
 
 }

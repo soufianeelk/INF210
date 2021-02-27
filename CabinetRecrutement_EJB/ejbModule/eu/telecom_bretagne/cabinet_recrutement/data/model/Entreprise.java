@@ -73,9 +73,10 @@ public class Entreprise implements Serializable {
 		this.offreEmplois = offreEmplois;
 	}
 
-	public void addOffreEmploi(OffreEmploi offreEmploi) {
+	public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmplois.add(offreEmploi);
 		offreEmploi.setEntrepriseBean(this);
+		return offreEmploi;
 	}
 	
 	public void removeOffreEmploi(OffreEmploi offreEmploi) {

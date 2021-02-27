@@ -1,5 +1,6 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -50,13 +51,13 @@ public interface IServiceCandidature
   /**
    * 
    */
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivites);
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<SecteurActivite> secteursActivites);
   
   
   /*
    * 
    */
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, int idNQualification, List<SecteurActivite> secteursActivite);
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<SecteurActivite> secteursActivite);
   
   /*
    * 
