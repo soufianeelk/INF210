@@ -38,13 +38,13 @@ public interface IServiceOffreEmploi {
 	  /**
 	   * 
 	   */
-	  public OffreEmploi nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<Integer> idSecteursActivites);
+	  public OffreEmploi nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualification, List<String> idSecteursActivites);
 	  
 	  
 	  /*
 	   * 
 	   */
-	  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, int idNQualification, List<Integer> idSecteursActivites);
+	  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualificationn, List<String> idSecteursActivites);
 	  
 	  /*
 	   * 

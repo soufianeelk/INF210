@@ -26,12 +26,12 @@ public class MessageOffreDEmploi implements Serializable {
 	private Date dateenvoi;
 
 	//bi-directional many-to-one association to Candidature
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="candidature")
 	private Candidature candidatureBean;
 
 	//bi-directional many-to-one association to OffreEmploi
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="offre_emploi")
 	private OffreEmploi offreEmploiBean;
 

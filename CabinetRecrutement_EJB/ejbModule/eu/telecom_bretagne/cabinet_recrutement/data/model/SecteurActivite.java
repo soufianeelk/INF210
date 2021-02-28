@@ -23,7 +23,7 @@ public class SecteurActivite implements Serializable {
 	private String intitule;
 
 	//bi-directional many-to-many association to Candidature
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="detail_candidature"
 		, joinColumns={
@@ -36,7 +36,7 @@ public class SecteurActivite implements Serializable {
 	private Set<Candidature> candidatures;
 
 	//bi-directional many-to-many association to OffreEmploi
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="detail_offre_emploi"
 		, joinColumns={

@@ -10,7 +10,7 @@
 
 IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
 Object utilisateur = session.getAttribute("utilisateur");
-Entreprise entreprise = ((Entreprise)utilisateur);
+Candidature candidature = ((Candidature)utilisateur);
 %>
 
 <%
@@ -21,9 +21,13 @@ if(request.getMethod().equalsIgnoreCase("post"))
 <% 
 	
 	String nom = request.getParameter("nom");
-	String descriptif = request.getParameter("descriptif");
+	String prenom = request.getParameter("prenom");
+	String dateNaissance = request.getParameter("dateNaissance");
 	String adresse_postale = request.getParameter("adresse_postale");
-	serviceEntreprise.miseAJourEntreprise(entreprise.getId(), nom, descriptif, adresse_postale);
+	String adresse_mail = request.getParameter("adresse_mail");
+	String descriptif = request.getParameter("cv");
+	
+	serviceEntreprise.miseAJourEntreprise(candidature.getId(), nom, prenom, dateNaissance, adresse_postale, adresse_mail, descriptif);
 	
 }
 %>

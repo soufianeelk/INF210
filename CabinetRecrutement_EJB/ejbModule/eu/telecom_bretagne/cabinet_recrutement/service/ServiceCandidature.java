@@ -1,5 +1,6 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -89,7 +90,7 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSecteursActivites) {
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites) {
 	  Candidature candidature = new Candidature();
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
@@ -97,15 +98,19 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setNom(nom);
 	  candidature.setPrenom(prenom);
 	  candidature.setDatedepot(new Date());
-	  candidature.setDatenaissance(dateNaissance);
+	  try {
+		  candidature.setDatenaissance(new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance));
+	  } catch (java.text.ParseException e) {
+		  e.printStackTrace();
+	  }
 	  
 	  
-	  
+	  int idNQualification = Integer.parseInt(nQualification);
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
 	  List<SecteurActivite> secteursActivites = new ArrayList<>();
 	  
-	  for(Integer idSQ: idSecteursActivites) {
-		  secteursActivites.add(secteurActiviteDAO.findById(idSQ));
+	  for(String idSQ: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(Integer.parseInt(idSQ)));
 	  }
 	  candidature.setSecteurActivites(new HashSet<SecteurActivite>());
 	  for(SecteurActivite sA: secteursActivites) {
@@ -115,14 +120,18 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSecteursActivites) {
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites) {
 	  Candidature candidature = candidatureDAO.findById(id);
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
 	  candidature.setCv(cv);
 	  candidature.setNom(nom);
 	  candidature.setPrenom(prenom);
-	  candidature.setDatenaissance(dateNaissance);
+	  try {
+		  candidature.setDatenaissance(new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance));
+	  } catch (java.text.ParseException e) {
+		  e.printStackTrace();
+	  }
 	  
 	  /*for(NiveauQualification nQ: niveauQualificationDAO.findAll()){
 		  for(Candidature c: nQ.getCandidatures()) {
@@ -134,7 +143,7 @@ public class ServiceCandidature implements IServiceCandidature
 	  }*/
 	  
 	
-	  
+	  int idNQualification = Integer.parseInt(nQualification);
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
 	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(2));
 	  
@@ -144,8 +153,8 @@ public class ServiceCandidature implements IServiceCandidature
 	  
 	  candidature.setSecteurActivites(new HashSet<SecteurActivite>());
 	  List<SecteurActivite> secteursActivites = new ArrayList<>();
-	  for(Integer idSQ: idSecteursActivites) {
-		  secteursActivites.add(secteurActiviteDAO.findById(idSQ));
+	  for(String idSQ: idSecteursActivites) {
+		  secteursActivites.add(secteurActiviteDAO.findById(Integer.parseInt(idSQ)));
 	  }
 	  for(SecteurActivite sA: secteursActivites) {
 		  secteurActiviteDAO.update(candidature.addSecteurActivite(sA));

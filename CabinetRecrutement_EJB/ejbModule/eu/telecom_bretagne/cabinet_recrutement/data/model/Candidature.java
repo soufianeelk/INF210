@@ -45,15 +45,15 @@ public class Candidature implements Serializable {
 	private NiveauQualification niveauQualificationBean;
 
 	//bi-directional many-to-one association to MessageCandidature
-	@OneToMany(mappedBy="candidatureBean")
+	@OneToMany(mappedBy="candidatureBean", fetch=FetchType.EAGER)
 	private Set<MessageCandidature> messageCandidatures;
 
 	//bi-directional many-to-one association to MessageOffreDemploi
-	@OneToMany(mappedBy="candidatureBean")
+	@OneToMany(mappedBy="candidatureBean", fetch=FetchType.EAGER)
 	private Set<MessageOffreDEmploi> messageOffreDemplois;
 
 	//bi-directional many-to-many association to SecteurActivite
-	@ManyToMany(mappedBy="candidatures")
+	@ManyToMany(mappedBy="candidatures", fetch=FetchType.EAGER)
 	private Set<SecteurActivite> secteurActivites;
 
 	public Candidature() {

@@ -51,13 +51,13 @@ public interface IServiceCandidature
   /**
    * 
    */
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSecteursActivites);
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites);
   
   
   /*
    * 
    */
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, Date dateNaissance, int idNQualification, List<Integer> idSsecteursActivite);
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSsecteursActivite);
   
   /*
    * 

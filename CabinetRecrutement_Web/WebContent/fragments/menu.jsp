@@ -2,10 +2,15 @@
 
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise,
+                eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature"%>
                 
-<% Object utilisateur = session.getAttribute("utilisateur"); %>
+<% 
+IServiceCandidature serviceCandidature = (IServiceCandidature) ServicesLocator.getInstance().getRemoteInterface("ServiceCandidature");
+
+Object utilisateur = session.getAttribute("utilisateur"); %>
+
 
 <div class="navbar-default sidebar" role="navigation">
   <div class="sidebar-nav navbar-collapse">
@@ -26,24 +31,38 @@
         </ul> <!-- /.nav-second-level -->
       </li>
       
-      <%if(utilisateur instanceof Entreprise){ %>
-      <li><h2></h2></li>
-      <li>
-       <a href="#"><i class="fa fa-th"></i> Menu <strong>ENTREPRISE</strong><span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
-          <li><a href="template.jsp?action=entreprise_liste_offres">Liste des offres d'emplois (<%= ((Entreprise) utilisateur).getOffreEmplois().size() %>)</a></li>
-          <li><a href="template.jsp?action=maj_entreprise">Mettre à jour les informations de l'entreprise</a></li>
-        </ul> <!-- /.nav-second-level -->
-      </li>
-      <%} %>
-      
-      <%if(utilisateur instanceof Candidature){ %>
       <li>
         <a href="#"><i class="fa fa-users"></i> Gestion des candidatures<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li><a href="template.jsp?action=nouvelle_candidature">Nouvelle candidature</a></li>
           <li><a href="template.jsp?action=liste_candidatures">Liste des candidatures</a></li>
+        </ul> <!-- /.nav-second-level -->
+      </li>
+      
+      <%if(utilisateur instanceof Entreprise){ 
+    	  Entreprise entreprise = ((Entreprise)utilisateur);
+      %>
+      <li><h2></h2></li>
+      <li>
+       <a href="#"><i class="fa fa-th"></i> Menu <strong>ENTREPRISE</strong><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
+          <li><a href="template.jsp?action=entreprise_liste_offres">Liste des offres d'emplois (<%= entreprise.getOffreEmplois().size() %>)</a></li>
+          <li><a href="template.jsp?action=maj_entreprise">Mettre à jour les informations de l'entreprise</a></li>
+        </ul> <!-- /.nav-second-level -->
+      </li>
+      <%} %>
+      
+      
+      <%if(utilisateur instanceof Candidature){ 
+    	  Candidature candidature = ((Candidature)utilisateur);
+      %>
+      <li><h2></h2></li>
+      <li>
+       <a href="#"><i class="fa fa-th"></i> Menu <strong>CANDIDATURE</strong><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li><a href="template.jsp?action=maj_candidature">Mettre à jour les informations de la candidature</a></li>
+          <li><a href="template.jsp?action=candidature_liste_offres">Liste des offres d'emplois potentielles ()</a></li>
         </ul> <!-- /.nav-second-level -->
       </li>
       <%} %>
