@@ -39,7 +39,7 @@ public class OffreEmploi implements Serializable {
 
 	//bi-directional many-to-one association to MessageOffreDemploi
 	@OneToMany(mappedBy="offreEmploiBean")
-	private Set<MessageOffreDemploi> messageOffreDemplois;
+	private Set<MessageOffreDEmploi> messageOffreDemplois;
 
 	//bi-directional many-to-one association to Entreprise
 	@ManyToOne
@@ -131,21 +131,21 @@ public class OffreEmploi implements Serializable {
 		return messageCandidature;
 	}*/
 
-	public Set<MessageOffreDemploi> getMessageOffreDemplois() {
+	public Set<MessageOffreDEmploi> getMessageOffreDemplois() {
 		return this.messageOffreDemplois;
 	}
 
-	public void setMessageOffreDemplois(Set<MessageOffreDemploi> messageOffreDemplois) {
+	public void setMessageOffreDemplois(Set<MessageOffreDEmploi> messageOffreDemplois) {
 		this.messageOffreDemplois = messageOffreDemplois;
 	}
 	
-	public MessageOffreDemploi addMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
+	public MessageOffreDEmploi addMessageOffreDemploi(MessageOffreDEmploi messageOffreDemploi) {
 		this.messageOffreDemplois.add(messageOffreDemploi);
 		messageOffreDemploi.setOffreEmploiBean(this);
 		return messageOffreDemploi;
 	}
 	
-	public void removeMessageOffreDemploi(MessageOffreDemploi messageOffreDemploi) {
+	public void removeMessageOffreDemploi(MessageOffreDEmploi messageOffreDemploi) {
 		this.messageOffreDemplois.remove(messageOffreDemploi);
 		messageOffreDemploi.setOffreEmploiBean(null);
 	}

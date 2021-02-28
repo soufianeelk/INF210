@@ -13,7 +13,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
 
 /**
@@ -65,13 +65,13 @@ public class ServiceEntreprise implements IServiceEntreprise
   }
   
   @Override
-  public List<MessageOffreDemploi> listeDesMessagesEnvoyes(int idEntreprise){
+  public List<MessageOffreDEmploi> listeDesMessagesEnvoyes(int idEntreprise){
 	  List<OffreEmploi> offresEmploi = new ArrayList<>();  
 	  offresEmploi = offreEmploiDAO.findByEntreprise(idEntreprise);
-	  List<MessageOffreDemploi> messagesEnvoyes = new ArrayList<>();
+	  List<MessageOffreDEmploi> messagesEnvoyes = new ArrayList<>();
 	  for(OffreEmploi offreEmploi: offresEmploi) {
 		  
-		  for(MessageOffreDemploi message: offreEmploi.getMessageOffreDemplois()) {
+		  for(MessageOffreDEmploi message: offreEmploi.getMessageOffreDemplois()) {
 			  messagesEnvoyes.add(message);
 		  }
 	  }

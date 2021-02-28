@@ -220,7 +220,7 @@ public class ControlesDAOServlet extends HttpServlet
     messageCandidatureDAO.findById(1);
     
     messageOffreDemploiDAO.findAll();
-    MessageOffreDemploi mOE = new MessageOffreDemploi();
+    MessageOffreDEmploi mOE = new MessageOffreDEmploi();
     mOE.setOffreEmploiBean(oE);
     mOE.setCandidatureBean(c);;
     messageOffreDemploiDAO.persist(mOE);

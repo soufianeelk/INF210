@@ -4,7 +4,7 @@
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise</class>
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature</class>
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature</class>
-    <class>eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi</class>
+    <class>eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi</class>
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.NiveauQualification</class>
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi</class>
     <class>eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite</class>

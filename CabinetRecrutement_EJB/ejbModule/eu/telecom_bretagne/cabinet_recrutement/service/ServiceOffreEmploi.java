@@ -17,7 +17,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.NiveauQualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
@@ -71,7 +71,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi
   @Override
   public List<OffreEmploi> listeDesOffresPourUneCandidature(int idCandidature){
 	  List<OffreEmploi> offresEmploi = new ArrayList<>(); 
-	  for(MessageOffreDemploi message: candidatureDAO.findById(idCandidature).getMessageOffreDemplois()) {
+	  for(MessageOffreDEmploi message: candidatureDAO.findById(idCandidature).getMessageOffreDemplois()) {
 		  offresEmploi.add(message.getOffreEmploiBean());
 	  }
 	  return offresEmploi;

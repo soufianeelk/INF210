@@ -3,7 +3,7 @@ package eu.telecom_bretagne.cabinet_recrutement.service;
 import java.util.List;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
 
 public interface IServiceOffreEmploi {

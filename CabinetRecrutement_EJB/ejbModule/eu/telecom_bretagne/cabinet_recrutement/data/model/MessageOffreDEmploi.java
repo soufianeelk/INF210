@@ -11,8 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="message_offre_demploi")
-@NamedQuery(name="MessageOffreDemploi.findAll", query="SELECT m FROM MessageOffreDemploi m")
-public class MessageOffreDemploi implements Serializable {
+@NamedQuery(name="MessageOffreDEmploi.findAll", query="SELECT m FROM MessageOffreDEmploi m")
+public class MessageOffreDEmploi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,7 +35,7 @@ public class MessageOffreDemploi implements Serializable {
 	@JoinColumn(name="offre_emploi")
 	private OffreEmploi offreEmploiBean;
 
-	public MessageOffreDemploi() {
+	public MessageOffreDEmploi() {
 	}
 
 	public Integer getId() {

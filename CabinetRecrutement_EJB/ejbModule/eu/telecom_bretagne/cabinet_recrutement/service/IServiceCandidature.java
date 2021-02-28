@@ -7,7 +7,7 @@ import javax.ejb.Remote;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
 
 /**
@@ -40,7 +40,7 @@ public interface IServiceCandidature
   /*
    * 
    */
-  public  List<MessageOffreDemploi> listeDesMessagesRecus(int idCandidature);
+  public  List<MessageOffreDEmploi> listeDesMessagesRecus(int idCandidature);
   
   /*
    * 

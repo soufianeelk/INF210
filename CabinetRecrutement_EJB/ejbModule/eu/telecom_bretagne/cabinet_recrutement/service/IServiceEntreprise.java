@@ -6,7 +6,7 @@ import javax.ejb.Remote;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 
 /**
  * Interface du service gérant les entreprises.
@@ -38,7 +38,7 @@ public interface IServiceEntreprise
   /*
    * 
    */
-  public List<MessageOffreDemploi> listeDesMessagesEnvoyes(int idEntreprise);
+  public List<MessageOffreDEmploi> listeDesMessagesEnvoyes(int idEntreprise);
   //-----------------------------------------------------------------------------
   
   /**

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDemploi;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
 
 /**
  * Session Bean implementation class MessageOffreDemploiDAO
@@ -33,31 +33,31 @@ public class MessageOffreDEmploiDAO
     // TODO Auto-generated constructor stub
   }
   //-----------------------------------------------------------------------------
-  public MessageOffreDemploi findById(Integer id)
+  public MessageOffreDEmploi findById(Integer id)
   {
-    return entityManager.find(MessageOffreDemploi.class, id);
+    return entityManager.find(MessageOffreDEmploi.class, id);
   }
   //----------------------------------------------------------------------------
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public List<MessageOffreDemploi> findAll()
+  public List<MessageOffreDEmploi> findAll()
   {
     Query query = entityManager.createQuery("select messageOffreDemploi from MessageOffreDemploi messageOffreDemploi order by messageOffreDemploi.id");
     List l = query.getResultList(); 
     
-    return (List<MessageOffreDemploi>)l;
+    return (List<MessageOffreDEmploi>)l;
   }
   //-----------------------------------------------------------------------------
-  public MessageOffreDemploi persist(MessageOffreDemploi messageOffreDemploi) {
+  public MessageOffreDEmploi persist(MessageOffreDEmploi messageOffreDemploi) {
 	  entityManager.persist(messageOffreDemploi);
 	  return messageOffreDemploi;
   }
   
-  public MessageOffreDemploi update(MessageOffreDemploi messageOffreDemploi) {
+  public MessageOffreDEmploi update(MessageOffreDEmploi messageOffreDemploi) {
 	  entityManager.merge(messageOffreDemploi);
 	  return messageOffreDemploi;
   }
   
-  public void remove(MessageOffreDemploi messageOffreDemploi) {
+  public void remove(MessageOffreDEmploi messageOffreDemploi) {
 	  if(!entityManager.contains(messageOffreDemploi)) {
 		  messageOffreDemploi = entityManager.merge(messageOffreDemploi);
 	  }
