@@ -20,7 +20,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
  */
 @Stateless
 @LocalBean
-public class ServiceMessageOffreDemploi implements IServiceMessageOffreDEmploi
+public class ServiceMessageOffreDEmploi implements IServiceMessageOffreDEmploi
 {
   //-----------------------------------------------------------------------------
   @EJB private MessageCandidatureDAO messageCandidatureDAO;

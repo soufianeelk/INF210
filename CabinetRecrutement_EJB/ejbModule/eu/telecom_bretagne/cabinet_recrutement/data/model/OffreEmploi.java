@@ -178,16 +178,10 @@ public class OffreEmploi implements Serializable {
 		return this.niveauQualificationBean;
 	}
 
-	public List<NiveauQualification> setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
-		List<NiveauQualification> nvxQualification = new ArrayList<>();
-		NiveauQualification nQ = this.getNiveauQualificationBean();
-		if(nQ != null) {
-			nQ.removeOffreEmploi(this);
-			nvxQualification.add(nQ);
-		}
+	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
 		this.niveauQualificationBean = niveauQualificationBean;
 		niveauQualificationBean.getOffreEmplois().add(this);
-		return nvxQualification;
+		return niveauQualificationBean;
 	}
 
 	/*public void setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {

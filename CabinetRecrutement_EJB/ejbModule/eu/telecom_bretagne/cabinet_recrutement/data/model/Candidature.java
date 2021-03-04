@@ -127,17 +127,10 @@ public class Candidature implements Serializable {
 		return this.niveauQualificationBean;
 	}
 
-	public List<NiveauQualification> setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
-		List<NiveauQualification> nvxQualification = new ArrayList<>();
-		NiveauQualification nQ = this.getNiveauQualificationBean();
-		if(nQ != null) {
-			nQ.removeCandidature(this);
-			nvxQualification.add(nQ);
-		}
+	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {
 		this.niveauQualificationBean = niveauQualificationBean;
 		niveauQualificationBean.getCandidatures().add(this);
-		nvxQualification.add(this.niveauQualificationBean);
-		return nvxQualification;
+		return niveauQualificationBean;
 	}
 	/*
 	public NiveauQualification setNiveauQualificationBean(NiveauQualification niveauQualificationBean) {

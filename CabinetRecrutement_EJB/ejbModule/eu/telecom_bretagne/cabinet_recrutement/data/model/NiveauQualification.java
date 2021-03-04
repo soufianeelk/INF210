@@ -23,7 +23,7 @@ public class NiveauQualification implements Serializable {
 	private String intitule;
 
 	//bi-directional many-to-one association to Candidature
-	@OneToMany(mappedBy="niveauQualificationBean")
+	@OneToMany(mappedBy="niveauQualificationBean", fetch=FetchType.EAGER)
 	private Set<Candidature> candidatures;
 
 	//bi-directional many-to-one association to OffreEmploi
@@ -65,7 +65,7 @@ public class NiveauQualification implements Serializable {
 	
 	public void removeCandidature(Candidature candidature) {
 		this.candidatures.remove(candidature);
-		candidature.setNiveauQualificationBean(null);
+		//candidature.setNiveauQualificationBean(null);
 	}
 
 	/*public Candidature addCandidature(Candidature candidature) {
@@ -98,7 +98,6 @@ public class NiveauQualification implements Serializable {
 	
 	public void removeOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmplois.remove(offreEmploi);
-		offreEmploi.setNiveauQualificationBean(null);
 	}
 
 	/*public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {

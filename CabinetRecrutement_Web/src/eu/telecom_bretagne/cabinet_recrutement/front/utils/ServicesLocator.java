@@ -51,43 +51,42 @@ public class ServicesLocator
     String nomJNDI = null;
     if(nomEJB.equals("ServiceEntreprise"))
       nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceEntreprise!eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise";
-    else if(nomEJB.equals("ServiceCandidature"))
-      nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature";
     else if(nomEJB.equals("ServiceOffreEmploi"))
         nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceOffreEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi";
     else if(nomEJB.equals("ServiceIndexation"))
         nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceIndexation!eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation";
+    else if(nomEJB.equals("ServiceCandidature"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature";
     else if(nomEJB.equals("ServiceMessageCandidature"))
         nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceMessageCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageCandidature";
-    else if(nomEJB.equals("ServiceMessageOffreEmploi"))
-        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceMessageOffreEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageOffreEmploi";
-
+    else if(nomEJB.equals("ServiceMessageOffreDEmploi"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceMessageOffreDEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageOffreDEmploi";
 
     // ATTENTION !!! La récupération d'un DAO n'existe ici que
     // pour les contrôles (utilisés dans la servlet ControleDAOServlet) :
     // ils ne sont normalement pas appelés par la couche IHM.
     
+    else if(nomEJB.equals("CandidatureDAO"))
+      nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/CandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO";
+
     else if(nomEJB.equals("EntrepriseDAO"))
       nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/EntrepriseDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO";
     
-    else if(nomEJB.equals("SecteurActiviteDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/SecteurActiviteDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteurActiviteDAO";
-    
-    else if(nomEJB.equals("CandidatureDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/CandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO";
+    else if(nomEJB.equals("MessageCandidatureDAO"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageCandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageCandidatureDAO";
 
-    else if(nomEJB.equals("OffreEmploiDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/OffreEmploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO";
+    else if(nomEJB.equals("MessageOffreDEmploiDAO"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageOffreDEmploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageOffreDEmploiDAO";
     
-    else if(nomEJB.equals("MessageOffreDemploiDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageOffreDemploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageOffreDemploiDAO";
+    else if(nomEJB.equals("OffreEmploiDAO"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/OffreEmploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO";
     
     else if(nomEJB.equals("NiveauQualificationDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/NiveauQualificationDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO";
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/NiveauQualificationDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO";
     
-    else if(nomEJB.equals("MessageCandidatureDAO"))
-    	nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageCandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageCandidatureDAO";
-    
+    else if(nomEJB.equals("SecteurActiviteDAO"))
+        nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/SecteurActiviteDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteurActiviteDAO";
+
     else
       throw new ServicesLocatorException("Il n'y a pas d'EJB avec ce nom...");
     

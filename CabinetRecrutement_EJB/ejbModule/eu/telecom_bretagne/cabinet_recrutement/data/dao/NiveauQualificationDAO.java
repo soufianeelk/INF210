@@ -33,7 +33,7 @@ public class NiveauQualificationDAO
     // TODO Auto-generated constructor stub
   }
   //-----------------------------------------------------------------------------
-  public NiveauQualification findById(Integer id)
+  public NiveauQualification findById(int id)
   {
     return entityManager.find(NiveauQualification.class, id);
   }

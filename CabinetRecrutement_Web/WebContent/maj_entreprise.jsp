@@ -43,13 +43,13 @@ if(request.getMethod().equalsIgnoreCase("post"))
                   <input class="form-control"  value="<%= entreprise.getId() %>" disabled="disabled" />
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Nom de l'entreprise" name="nom" value="test" />
+                  <input class="form-control" placeholder="Nom de l'entreprise" name="nom" value=<%= entreprise.getNom() %> />
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" placeholder="Descriptif de l'entreprise" rows="5" name="descriptif">test</textarea>
+                  <textarea class="form-control" placeholder="Descriptif de l'entreprise" rows="5" name="descriptif"><%= entreprise.getDescriptif() %></textarea>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Adresse postale (ville)" name="adresse_postale" value="test" />
+                  <input class="form-control" placeholder="Adresse postale (ville)" name="adresse_postale" value= <%= entreprise.getAdressePostale() %> />
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-success btn-circle btn-lg" name="submit-insertion"><i class="fa fa-check"></i></button>

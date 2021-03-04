@@ -124,11 +124,37 @@ CREATE TABLE message_candidature
 insert into entreprise values (nextval('entreprise_id_seq'),'IMT Atlantique','IMT Atlantique est une grande école pionnière en formation, en recherche et en entrepreneuriat et en tout plein de choses...','Plouzané');
 insert into entreprise values (nextval('entreprise_id_seq'),'ENIB','Une école d''ingénieur juste à côté...','Plouzané');
 
-insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'BAC+2');
+insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'CAP/BEP');
+insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'Bac');
+insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'BAC+3');
 insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'BAC+5');
+insert into niveau_qualification values (nextval('niveau_qualification_id_seq'), 'Dotorat');
 
-insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Numérique');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Achats/Logistique');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Agriculture');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Assurance');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'BTP/Immobilier');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Communication/Art/Média/Mode');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Direction Générale/Executive');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Electronique/Microélectronique');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Finance/Banque');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Hôtellerie/Restauration/Tourisme');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Informatique');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Marketing');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Ressources Humaines');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Télécom/Réseaux');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Assistanat/Secrétariat');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Agroalimentaire');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Audit/Conseil/Expertises');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Commercial');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Comptabilité');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Disitribution/Commerce');
 insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Environnement');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Formation/Enseignement');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Industrie/Ingénierie/Production');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Juridique/Fiscal/Droit');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Public/Parapublic');
+insert into secteur_activite values (nextval('secteur_activite_id_seq'), 'Santé/Social/Biologie/Humanitaire');
 
 insert into candidature values (nextval('candidature_id_seq'), 'Hallyday', 'Johny', '01/01/2001', '102 rue de Paris', 'johny@halyday.com', 'Carrière Musicale dans le rockNroll', '27/01/2021', '1');
 insert into candidature values (nextval('candidature_id_seq'), 'Paradis', 'Vanessa', '01/01/2008', '102 rue de Marseille', 'vanessa@paradis.com', 'Carrière Musicale dans la variéte française', '27/01/2021', '2');

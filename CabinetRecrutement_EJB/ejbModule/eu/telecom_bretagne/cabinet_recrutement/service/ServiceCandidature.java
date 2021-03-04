@@ -90,37 +90,46 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites) {
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, String[] idSecteursActivites) {
 	  Candidature candidature = new Candidature();
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
+	  //A supp
 	  candidature.setCv(cv);
 	  candidature.setNom(nom);
 	  candidature.setPrenom(prenom);
 	  candidature.setDatedepot(new Date());
 	  try {
+		  dateNaissance = dateNaissance.replaceAll("-", "/");
 		  candidature.setDatenaissance(new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance));
 	  } catch (java.text.ParseException e) {
 		  e.printStackTrace();
 	  }
 	  
-	  
 	  int idNQualification = Integer.parseInt(nQualification);
-	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
+	  NiveauQualification nQ = niveauQualificationDAO.findById(idNQualification);
+	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(nQ));
 	  List<SecteurActivite> secteursActivites = new ArrayList<>();
 	  
-	  for(String idSQ: idSecteursActivites) {
+	  /*for(String idSQ: idSecteursActivites) {
 		  secteursActivites.add(secteurActiviteDAO.findById(Integer.parseInt(idSQ)));
+	  }*/
+	  for(int i=0; i<idSecteursActivites.length; i++) {
+		  int idSA = Integer.parseInt(idSecteursActivites[i]);
+		  SecteurActivite sAC = secteurActiviteDAO.findById(idSA);
+		  secteursActivites.add(sAC);
 	  }
 	  candidature.setSecteurActivites(new HashSet<SecteurActivite>());
 	  for(SecteurActivite sA: secteursActivites) {
-		  secteurActiviteDAO.update(candidature.addSecteurActivite(sA));
+		  sA = candidature.addSecteurActivite(sA);
+		  secteurActiviteDAO.update(sA);
 	  }
+	  
 	  return(candidatureDAO.persist(candidature));
   }
   
   @Override
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites) {
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, String[] idSecteursActivites) {
 	  Candidature candidature = candidatureDAO.findById(id);
 	  candidature.setAdresseemail(adresseMail);
 	  candidature.setAdressepostale(adressePostale);
@@ -128,6 +137,7 @@ public class ServiceCandidature implements IServiceCandidature
 	  candidature.setNom(nom);
 	  candidature.setPrenom(prenom);
 	  try {
+		  dateNaissance = dateNaissance.replaceAll("-", "/");
 		  candidature.setDatenaissance(new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance));
 	  } catch (java.text.ParseException e) {
 		  e.printStackTrace();
@@ -144,8 +154,12 @@ public class ServiceCandidature implements IServiceCandidature
 	  
 	
 	  int idNQualification = Integer.parseInt(nQualification);
-	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(1));
-	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)).get(2));
+	  
+	  NiveauQualification nQBean = candidature.getNiveauQualificationBean();
+	  nQBean.removeCandidature(candidature);
+	  niveauQualificationDAO.update(candidature.getNiveauQualificationBean());
+	  
+	  niveauQualificationDAO.update(candidature.setNiveauQualificationBean(niveauQualificationDAO.findById(idNQualification)));
 	  
 	  for(SecteurActivite sA: candidature.getSecteurActivites()) {
 		  sA.removeCandidature(candidature);
@@ -163,8 +177,29 @@ public class ServiceCandidature implements IServiceCandidature
   }
   
   @Override
+  public HashSet<Candidature> findCandidatureByNiveauQualificationAndSecteurActivite(int idOffre) {
+		
+		OffreEmploi offre = offreEmploiDAO.findById(idOffre);
+		int idNiveauQualification = offre.getNiveauQualificationBean().getId().intValue();
+		HashSet<Candidature> listeCandidature = new HashSet<Candidature>();
+		
+		for (SecteurActivite sA : offre.getSecteurActivites()) {
+			
+			for (Candidature c : candidatureDAO.findBySecteurActiviteAndNiveauQualification(sA.getId().intValue(), idNiveauQualification)) {
+				listeCandidature.add(c);
+			}
+			
+		}
+		
+		return listeCandidature;
+		
+	}
+  
+  @Override
   public void effaceCandidature(int id) {
 
   }
+  
+  
   
 }

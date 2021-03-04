@@ -2,10 +2,11 @@ package eu.telecom_bretagne.cabinet_recrutement.service;
 
 import java.util.List;
 
-import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
+import javax.ejb.Remote;
 
+import eu.telecom_bretagne.cabinet_recrutement.data.model.OffreEmploi;
+
+@Remote
 public interface IServiceOffreEmploi {
 	
 	//-----------------------------------------------------------------------------
@@ -38,13 +39,13 @@ public interface IServiceOffreEmploi {
 	  /**
 	   * 
 	   */
-	  public OffreEmploi nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualification, List<String> idSecteursActivites);
+	  public void nouvelleOffreEmploi(String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualification, String[] idSecteursActivites);
 	  
 	  
 	  /*
 	   * 
 	   */
-	  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualificationn, List<String> idSecteursActivites);
+	  public OffreEmploi miseAJourOffreEmploi(int id, String descriptif, String profilRecherche, String titre, int idEntreprise, String nQualificationn, String[] idSecteursActivites);
 	  
 	  /*
 	   * 

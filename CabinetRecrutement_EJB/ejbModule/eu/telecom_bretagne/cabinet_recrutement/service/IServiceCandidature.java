@@ -1,6 +1,6 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -8,7 +8,6 @@ import javax.ejb.Remote;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageCandidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.MessageOffreDEmploi;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.SecteurActivite;
 
 /**
  * Interface du service gérant les candidatures.
@@ -51,13 +50,15 @@ public interface IServiceCandidature
   /**
    * 
    */
-  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSecteursActivites);
+  public Candidature nouvelleCandidature(String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, String[] idSecteursActivites);
   
   
   /*
    * 
    */
-  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, List<String> idSsecteursActivite);
+  public Candidature miseAJourCandidature(int id, String adresseMail, String adressePostale, String cv, String nom, String prenom, String dateNaissance, String nQualification, String[] idSsecteursActivite);
+  
+  public HashSet<Candidature> findCandidatureByNiveauQualificationAndSecteurActivite(int idOffre);
   
   /*
    * 
